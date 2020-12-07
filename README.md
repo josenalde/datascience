@@ -1,2 +1,2 @@
 # datascience
-a course on data science fundamentals for developers - programming-business focused
+a course on data science fundamentals for developers - programming-business oriented
