@@ -1,0 +1,103 @@
+
+post1 = [
+   {
+      "name": "Andrea Le",
+      "email": "andrea_le@fake-mail.com",
+      "version": 5,
+      "scores": [ 85, 95, 75 ],
+      "dateCreated": Date('2003-03-26')
+      //"dateCreated": { "$date": "2003-03-26" }
+   },
+   {
+      "email": "john@fake-mail.com",
+      "version": 4,
+      "scores": [ 90, 90, 70 ],
+      "dateCreated": Date('2001-04-15')
+      //"dateCreated": { "$date": "2001-04-15" }
+   },
+   {
+      "name": "Greg Powell",
+      "email": "greg_powell@fake-mail.com",
+      "version": 1,
+      "scores": [ 65, 75, 80 ],
+      "dateCreated": Date('1999-02-10')
+      //"dateCreated": { "$date": "1999-02-10" }
+   },
+   {
+      "name": "Andrea Oliver",
+      "email": "andrea_pinto@gmail.com",
+      "version": 5,
+      "scores": [ 85, 90, 75 ],
+      "dateCreated": Date('2003-03-26')
+   },
+   {
+      "name": "Josenalde Oliveira",
+      "email": "ftcd_tads@gmail.com",
+      "version": 2,
+      "years": 5
+   },
+   {
+      "name": "Pedro Paulo",
+      "email": "pedro@gmail.com",
+      "years": 11
+   }
+];
+tb = db.employees
+tb.insertMany(post1);
+
+//tb.find({'name' : {'$regex': '^Andrea'}}); //começa com Andrea
+
+//tb.find({'scores' : 90}, {'_id': 0});
+
+//tb.find({'scores' : 90, 'version': 5}, , {'_id': 0});
+
+//tb.find({'$or': [{ 'version': 5}, {'name': 'Andrea Le'}]}, , {'_id': 0});
+
+//tb.find({'name': {'$not': { '$eq': 'Andrea Le'}}}, {'_id': 0}); //ocultar campo auto_generated _id
+
+// O _id sempre precisa ser escondido explicitamente
+// se quiser algum campo específico, os outros automaticamente são omitidos
+
+//tb.find({'scores' : 90}, {'_id': 0, 'name': 1});
+
+//tb.find({'years' : { '$gte' : 10}}, {'_id': 0, 'name': 1, 'years':1}); //gte, $lte
+
+//tb.find({'dateCreated': {'$gt': Date('2000-06-22')}});
+
+//tb.find({'scores': {'$elemMatch': {'$gt': 50, '$lte': 70}}}); // ao menos um score > 50 e <= 70
+
+tb.updateOne(
+   { 'name': 'Josenalde Oliveira' },
+   { $set:
+      {
+        'name' : 'Josenalde Barbosa'
+      }
+   }
+)
+
+tb.find({}, {"_id":0, "name":1})
+
+/*
+post2 = {
+   _id: 100,
+   quantity: 500,
+   instock: true,
+   reorder: false,
+   details: { model: '2600', make: 'Kustom Kidz' },
+   tags: [ 'coats', 'outerwear', 'clothing' ],
+   ratings: [ { by: 'Customer007', rating: 4 } ]
+}
+
+tb.updateOne(
+   { _id: 100 },
+   { $set:
+      {
+        "tags.1": "rain gear",
+        "ratings.0.rating": 2
+      }
+   }
+)
+*/
+
+//deleteOne
+//deleteMany
